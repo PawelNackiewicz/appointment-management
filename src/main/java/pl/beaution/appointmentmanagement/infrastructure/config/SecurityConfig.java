@@ -3,13 +3,17 @@ package pl.beaution.appointmentmanagement.infrastructure.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import pl.beaution.appointmentmanagement.infrastructure.security.CookieAuthenticationFilter;
 
 import java.util.List;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -29,6 +33,8 @@ public class SecurityConfig {
         http.authorizeHttpRequests(authorize -> authorize
                 .anyRequest().permitAll()
         );
+
+        http.addFilterBefore(new CookieAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

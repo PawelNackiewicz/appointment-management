@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.beaution.appointmentmanagement.domain.model.security.User;
 import pl.beaution.appointmentmanagement.domain.repository.UserRepository;
-import pl.beaution.appointmentmanagement.domain.service.password.PasswordService;
+import pl.beaution.appointmentmanagement.domain.service.auth.password.PasswordService;
 
 @Service
 public class UserService implements IUserService {

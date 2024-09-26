@@ -1,4 +1,4 @@
-package pl.beaution.appointmentmanagement.domain.service.password;
+package pl.beaution.appointmentmanagement.domain.service.auth.password;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
