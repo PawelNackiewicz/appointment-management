@@ -22,7 +22,9 @@ public class TokenService implements ITokenService {
 
     @Value("${security.jwt.token.secret-key:secret-key}")
     private String secretKey;
-    public TokenService() {}
+
+    public TokenService() {
+    }
 
     @Override
     public void addTokenToResponse(HttpServletResponse response, String token) {
@@ -43,6 +45,7 @@ public class TokenService implements ITokenService {
     public String[] parseToken(String token) {
         return token.split("&");
     }
+
     @Override
     public boolean validateToken(String token, User user) {
         String[] parts = token.split("&");
@@ -53,6 +56,7 @@ public class TokenService implements ITokenService {
 
         return hmac.equals(calculateHmac(user)) && userId == user.getId();
     }
+
     @Override
     public String calculateHmac(User user) {
         byte[] secretKeyBytes = Objects.requireNonNull(secretKey).getBytes(StandardCharsets.UTF_8);

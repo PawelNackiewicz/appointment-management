@@ -1,7 +1,5 @@
 package pl.beaution.appointmentmanagement.application.dto.user;
 
-import pl.beaution.appointmentmanagement.domain.model.security.Role;
-import pl.beaution.appointmentmanagement.domain.model.security.RoleAssignment;
 import pl.beaution.appointmentmanagement.domain.model.security.UserStatus;
 
 import java.util.Set;

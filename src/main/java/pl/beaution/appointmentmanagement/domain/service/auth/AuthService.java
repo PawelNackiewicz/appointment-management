@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @Service
-public class AuthService implements IAuthService{
+public class AuthService implements IAuthService {
 
     private final UserRepository userRepository;
     private final PasswordService passwordService;
@@ -27,6 +27,7 @@ public class AuthService implements IAuthService{
         this.passwordService = passwordService;
         this.tokenService = tokenService;
     }
+
     @Override
     public String login(String login, String password) {
         User user = userRepository.findByEmail(login).orElseThrow(() -> new RuntimeException("User not found"));

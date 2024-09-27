@@ -17,6 +17,7 @@ import pl.beaution.appointmentmanagement.domain.service.auth.token.TokenService;
 public class AuthController {
     private final AuthService authService;
     private final TokenService tokenService;
+
     @Autowired
     public AuthController(AuthService authService, TokenService tokenService) {
         this.authService = authService;

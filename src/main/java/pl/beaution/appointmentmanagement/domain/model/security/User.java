@@ -1,6 +1,7 @@
 package pl.beaution.appointmentmanagement.domain.model.security;
 
 import jakarta.persistence.*;
+
 import java.util.Set;
 
 @Entity

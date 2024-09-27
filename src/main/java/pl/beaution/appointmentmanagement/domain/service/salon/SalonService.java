@@ -8,19 +8,16 @@ import pl.beaution.appointmentmanagement.domain.model.Salon;
 import pl.beaution.appointmentmanagement.domain.model.security.Role;
 import pl.beaution.appointmentmanagement.domain.model.security.RoleAssignment;
 import pl.beaution.appointmentmanagement.domain.model.security.User;
+import pl.beaution.appointmentmanagement.domain.repository.RoleAssignmentRepository;
 import pl.beaution.appointmentmanagement.domain.repository.RoleRepository;
 import pl.beaution.appointmentmanagement.domain.repository.SalonRepository;
 import pl.beaution.appointmentmanagement.domain.repository.UserRepository;
-import pl.beaution.appointmentmanagement.domain.repository.RoleAssignmentRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class SalonService implements ISalonService{
+public class SalonService implements ISalonService {
 
     private final SalonRepository salonRepository;
     private final RoleRepository roleRepository;
@@ -48,9 +45,11 @@ public class SalonService implements ISalonService{
     public Salon updateSalon(Salon salon) throws IllegalAccessException {
         return null;
     }
+
     @Override
     public Salon createSalonForUser(Long userId, Salon salon) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));;
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
+        ;
         Salon savedSalon = salonRepository.save(salon);
         assignOwnerRoleToUser(user, savedSalon);
         return savedSalon;

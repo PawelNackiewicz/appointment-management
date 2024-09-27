@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CustomerService implements ICustomerService{
+public class CustomerService implements ICustomerService {
     private final CustomerRepository customerRepository;
 
     @Autowired
@@ -29,7 +29,7 @@ public class CustomerService implements ICustomerService{
     @Override
     public Customer updateCustomer(Customer customer) throws IllegalAccessException {
         Optional<Customer> existingCustomer = customerRepository.findById(customer.getId());
-        if(existingCustomer.isEmpty()) {
+        if (existingCustomer.isEmpty()) {
             throw new IllegalAccessException("Customer with id " + customer.getId() + " does not exist");
         }
         return customerRepository.save(customer);
@@ -45,6 +45,7 @@ public class CustomerService implements ICustomerService{
         return customerRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Customer with ID " + id + " not found."));
     }
+
     @Override
     public void deleteCustomer(Long id) {
         if (!customerRepository.existsById(id)) {

@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface ISalonService {
     Salon createSalon(Salon salon);
+
     Salon updateSalon(Salon salon) throws IllegalAccessException;
+
     Salon createSalonForUser(Long userId, Salon salon);
 
     List<SalonResponseDto> findSalonsByUserId(Long userId);
