@@ -51,7 +51,6 @@ public class AuthService implements IAuthService{
             }
         }
         throw new IllegalArgumentException("No valid token found in cookies");
-
     }
 
     public User findByEmail(String email) {

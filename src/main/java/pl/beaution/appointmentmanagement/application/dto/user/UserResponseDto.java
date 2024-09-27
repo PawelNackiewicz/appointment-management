@@ -1,5 +1,7 @@
 package pl.beaution.appointmentmanagement.application.dto.user;
 
+import pl.beaution.appointmentmanagement.domain.model.security.Role;
+import pl.beaution.appointmentmanagement.domain.model.security.RoleAssignment;
 import pl.beaution.appointmentmanagement.domain.model.security.UserStatus;
 
 import java.util.Set;
@@ -10,7 +12,7 @@ public class UserResponseDto {
     private String firstName;
     private String lastName;
     private UserStatus status;
-    private Set<String> roles;
+    private Set<RoleAssignmentDto> roleAssignments;
 
     public Long getId() {
         return id;
@@ -52,11 +54,11 @@ public class UserResponseDto {
         this.status = status;
     }
 
-    public Set<String> getRoles() {
-        return roles;
+    public Set<RoleAssignmentDto> getRoleAssignments() {
+        return roleAssignments;
     }
 
-    public void setRoles(Set<String> roles) {
-        this.roles = roles;
+    public void setRoleAssignments(Set<RoleAssignmentDto> roleAssignments) {
+        this.roleAssignments = roleAssignments;
     }
 }

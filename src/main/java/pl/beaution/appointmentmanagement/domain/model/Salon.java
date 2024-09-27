@@ -16,4 +16,36 @@ public class Salon {
 
     @OneToMany(mappedBy = "salon", cascade = CascadeType.ALL)
     private Set<RoleAssignment> roleAssignments;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Set<RoleAssignment> getRoleAssignments() {
+        return roleAssignments;
+    }
+
+    public void setRoleAssignments(Set<RoleAssignment> roleAssignments) {
+        this.roleAssignments = roleAssignments;
+    }
 }

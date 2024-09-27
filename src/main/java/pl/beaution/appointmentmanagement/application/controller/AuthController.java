@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.beaution.appointmentmanagement.application.dto.auth.LoginRequestDto;
 import pl.beaution.appointmentmanagement.application.dto.user.UserResponseDto;
-import pl.beaution.appointmentmanagement.domain.model.security.User;
 import pl.beaution.appointmentmanagement.domain.service.auth.AuthService;
 import pl.beaution.appointmentmanagement.domain.service.auth.token.TokenService;
 
