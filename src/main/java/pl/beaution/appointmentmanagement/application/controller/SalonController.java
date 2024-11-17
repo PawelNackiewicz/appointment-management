@@ -1,5 +1,6 @@
 package pl.beaution.appointmentmanagement.application.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/salons")
+@Hidden
 public class SalonController {
 
     private final SalonService salonService;

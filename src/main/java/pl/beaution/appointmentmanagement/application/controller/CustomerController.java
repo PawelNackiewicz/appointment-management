@@ -1,5 +1,6 @@
 package pl.beaution.appointmentmanagement.application.controller;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/customers")
+@Hidden
 public class CustomerController {
 
     private final ICustomerService customerService;
