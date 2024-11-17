@@ -1,5 +1,9 @@
 package pl.beaution.appointmentmanagement.application.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -14,6 +18,7 @@ import pl.beaution.appointmentmanagement.domain.service.auth.token.TokenService;
 
 @RestController
 @RequestMapping("/api/auth/sessions")
+@Tag(name = "Auth", description = "Endpoints for user authentication")
 public class AuthController {
     private final AuthService authService;
     private final TokenService tokenService;
@@ -24,6 +29,12 @@ public class AuthController {
         this.tokenService = tokenService;
     }
 
+    @Operation(summary = "Login user", description = "Logs in user and returns JWT token",
+    responses = {
+        @ApiResponse(responseCode = "200", description = "User logged in successfully"),
+        @ApiResponse(responseCode = "401", description = "Invalid credentials"),
+        @ApiResponse(responseCode = "400", description = "Bad request")
+    })
     @PostMapping
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDto loginRequest, HttpServletResponse response) {
         try {
@@ -35,6 +46,13 @@ public class AuthController {
         }
     }
 
+    @Operation(summary = "Get logged in user", description = "Returns information about logged in user",
+        responses = {
+            @ApiResponse(responseCode = "200", description = "User found"),
+            @ApiResponse(responseCode = "401", description = "User not authenticated")
+        }
+    )
+    @SecurityRequirement(name = "bearer")
     @GetMapping("/me")
     public ResponseEntity<?> getLoggedInUser(HttpServletRequest request) {
         try {
