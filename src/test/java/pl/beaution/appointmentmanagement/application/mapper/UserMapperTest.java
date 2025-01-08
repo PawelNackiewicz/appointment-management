@@ -15,7 +15,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class UserServiceTest {
+class UserMapperTest {
 
     @Mock
     private UserRepository userRepository;
@@ -28,7 +28,7 @@ class UserServiceTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this); // Inicjalizuje mocki
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test

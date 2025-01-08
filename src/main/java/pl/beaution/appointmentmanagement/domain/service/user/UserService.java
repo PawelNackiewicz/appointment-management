@@ -30,8 +30,31 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User updateUser(User user) throws IllegalAccessException {
-        return null;
+    public User updateUser(Long id, User user) throws IllegalArgumentException {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User with ID " + id + " does not exist."));
+
+        if (user.getEmail() != null) {
+            existingUser.setEmail(user.getEmail());
+        }
+        if (user.getPassword() != null) {
+            String hashedPassword = passwordService.hashPassword(user.getPassword());
+            existingUser.setPassword(hashedPassword);
+        }
+        if (user.getFirstName() != null) {
+            existingUser.setFirstName(user.getFirstName());
+        }
+        if (user.getLastName() != null) {
+            existingUser.setLastName(user.getLastName());
+        }
+        if (user.getStatus() != null) {
+            existingUser.setStatus(user.getStatus());
+        }
+        if (user.getRoleAssignments() != null) {
+            existingUser.setRoleAssignments(user.getRoleAssignments());
+        }
+
+        return userRepository.save(existingUser);
     }
 
     @Override

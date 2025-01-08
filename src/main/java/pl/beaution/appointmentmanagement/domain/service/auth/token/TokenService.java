@@ -28,11 +28,8 @@ public class TokenService implements ITokenService {
 
     @Override
     public void addTokenToResponse(HttpServletResponse response, String token) {
-        Cookie authCookie = new Cookie(CookieAuthenticationFilter.COOKIE_NAME, token);
-        authCookie.setHttpOnly(true);
-        authCookie.setSecure(true);
-        authCookie.setPath("/");
-        authCookie.setMaxAge((int) Duration.of(1, ChronoUnit.DAYS).getSeconds());
+        int maxAgeInSeconds = (int) Duration.of(1, ChronoUnit.DAYS).getSeconds();
+        Cookie authCookie = createAuthCookie(token, maxAgeInSeconds); response.addCookie(authCookie);
         response.addCookie(authCookie);
     }
 
@@ -60,7 +57,7 @@ public class TokenService implements ITokenService {
     @Override
     public String calculateHmac(User user) {
         byte[] secretKeyBytes = Objects.requireNonNull(secretKey).getBytes(StandardCharsets.UTF_8);
-        byte[] valueBytes = Objects.requireNonNull(user.getId() + "&" + user.getEmail()).getBytes(StandardCharsets.UTF_8);
+        byte[] valueBytes = (user.getId() + "&" + user.getEmail()).getBytes(StandardCharsets.UTF_8);
 
         try {
             Mac mac = Mac.getInstance("HmacSHA512");
@@ -72,5 +69,20 @@ public class TokenService implements ITokenService {
         } catch (NoSuchAlgorithmException | InvalidKeyException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void cleanAuthCookie(HttpServletResponse response) {
+        Cookie authCookie = createAuthCookie(null, 0);
+        response.addCookie(authCookie);
+    }
+
+    private Cookie createAuthCookie(String value, int maxAgeInSeconds) {
+        Cookie authCookie = new Cookie(CookieAuthenticationFilter.COOKIE_NAME, value);
+        authCookie.setHttpOnly(true);
+        authCookie.setSecure(true);
+        authCookie.setPath("/");
+        authCookie.setMaxAge(maxAgeInSeconds);
+        return authCookie;
     }
 }
