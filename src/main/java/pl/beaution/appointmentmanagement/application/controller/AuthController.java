@@ -62,4 +62,22 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
         }
     }
+
+    @Operation(summary = "Logout user",
+            description = "Invalidates the JWT token for the user",
+            responses = {
+                    @ApiResponse(responseCode = "204", description = "User logged out successfully"),
+                    @ApiResponse(responseCode = "401", description = "User not authenticated")
+            }
+    )
+    @SecurityRequirement(name = "bearer")
+    @DeleteMapping
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            tokenService.cleanAuthCookie(response);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
+        }
+    }
 }

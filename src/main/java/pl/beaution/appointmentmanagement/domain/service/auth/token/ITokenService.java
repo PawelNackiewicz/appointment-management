@@ -13,4 +13,6 @@ public interface ITokenService {
     String[] parseToken(String token);
 
     String calculateHmac(User user);
+
+    void cleanAuthCookie(HttpServletResponse response);
 }
