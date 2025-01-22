@@ -1,6 +1,7 @@
 package pl.beaution.appointmentmanagement.domain.model.security;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.Set;
@@ -12,7 +13,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "Email is mandatory")
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
+    @Email
     private String email;
     @NotBlank(message = "Password is mandatory")
     @Column(nullable = false)

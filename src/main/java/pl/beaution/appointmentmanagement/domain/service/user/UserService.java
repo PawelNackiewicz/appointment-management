@@ -21,6 +21,9 @@ public class UserService implements IUserService {
     @Override
     public User createUser(User user) {
         try {
+            if(userRepository.existsByEmail(user.getEmail())) {
+                throw new IllegalArgumentException("User with email " + user.getEmail() + " already exists.");
+            }
             String hashedPassword = passwordService.hashPassword(user.getPassword());
             user.setPassword(hashedPassword);
             return userRepository.save(user);
