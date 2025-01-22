@@ -49,7 +49,6 @@ public class SalonService implements ISalonService {
     @Override
     public Salon createSalonForUser(Long userId, Salon salon) {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
-        ;
         Salon savedSalon = salonRepository.save(salon);
         assignOwnerRoleToUser(user, savedSalon);
         return savedSalon;
